@@ -29,5 +29,31 @@ class Program
                 Console.WriteLine($"Перетворене число: {readNumber}");
             }
         }
+
+        // Крок 3: дописування ще двох чисел
+        Console.WriteLine("\n=== Крок 3: Дописування двох чисел ===");
+        int secondNumber = 42;
+        int thirdNumber = 256;
+        using (StreamWriter writer = new StreamWriter(path, append: true))
+        {
+            writer.WriteLine(secondNumber.ToString("D8"));
+            writer.WriteLine(thirdNumber.ToString("D8"));
+        }
+        Console.WriteLine($"Дописано: {secondNumber.ToString("D8")}");
+        Console.WriteLine($"Дописано: {thirdNumber.ToString("D8")}");
+
+        // Крок 4: читання всіх рядків з номерами
+        Console.WriteLine("\n=== Крок 4: Вміст файла ===");
+        using (StreamReader reader = new StreamReader(path))
+        {
+            int number = 1;
+            string? line = reader.ReadLine();
+            while (line != null)
+            {
+                Console.WriteLine($"{number}: {line}");
+                number++;
+                line = reader.ReadLine();
+            }
+        }
     }
 }
