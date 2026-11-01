@@ -55,5 +55,31 @@ class Program
                 line = reader.ReadLine();
             }
         }
+
+        // Крок 5: заміна другого числа без переписування всього файла
+        Console.WriteLine("\n=== Крок 5: Заміна другого числа ===");
+        int newValue = 4567;
+        int lineLength = 8 + Environment.NewLine.Length;
+        int index = 1;
+        using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Write))
+        using (StreamWriter writer = new StreamWriter(stream))
+        {
+            stream.Position = index * lineLength;
+            writer.Write(newValue.ToString("D8"));
+        }
+        Console.WriteLine($"Друге число замінено на: {newValue.ToString("D8")}");
+
+        Console.WriteLine("\n=== Новий вміст файла ===");
+        using (StreamReader reader = new StreamReader(path))
+        {
+            int number = 1;
+            string? line = reader.ReadLine();
+            while (line != null)
+            {
+                Console.WriteLine($"{number}: {line}");
+                number++;
+                line = reader.ReadLine();
+            }
+        }
     }
 }
